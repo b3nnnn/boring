@@ -1,4 +1,4 @@
-from flask import Flask, request 
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ def apply_header(response):
     response.headers["backend"] = "true"
     return response
 
-@app.route('/', defaults={'u_path': ''})
+@app.route('/', defaults={'u_path': ''}, methods = ['GET', 'POST', 'PUT', 'DELETE'])
 @app.route('/<path:u_path>')
 def catch_all(u_path):
     app.logger.critical(request.headers)
