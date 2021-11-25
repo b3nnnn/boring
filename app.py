@@ -17,4 +17,4 @@ def catch_all(u_path):
     app.logger.critical(request.endpoint)
     app.logger.critical(request.method)
     app.logger.critical(request.remote_addr)
-    return "Yeah Nah"
+    return ("Yeah Nah", 418)
