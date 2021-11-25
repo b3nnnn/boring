@@ -18,3 +18,5 @@ jobs:
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: GitHub Container Registry Docker Action
       uses: trentjones21/github-docker@master
+      with:
+        accessToken: ${{ github.token }}
