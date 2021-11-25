@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: boring 
+  annotations:
+    ves.io/sites: ves-io-system/sg3-sin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boring 
+  template:
+    metadata:
+      labels:
+        app: boring 
+    spec:
+      containers:
+        - name: boring 
+          image: docker.io/bennalp/boring
+          ports:
+            - containerPort: 5000 
+              protocol: TCP
+          env:
+            - name: NODENAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: spec.nodeName
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: boring
+  labels:
+    app: boring
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  selector:
+    app: boring
+  type: ClusterIP
+  sessionAffinity: None
