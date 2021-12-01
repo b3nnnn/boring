@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: boring 
-          image: docker.io/bennalp/boring
+          image: ghcr.io/b3nnnn/boring/boring:latest
           ports:
             - containerPort: 5000 
               protocol: TCP
